@@ -7,7 +7,7 @@
 enum opcodes {
     OP_NOP, // 0x00
     OP_Unnamed01, // 0x01
-    OP_Unnamed02, // 0x02
+    OP_StoreAInMemoryLocationBC, // 0x02
     OP_IncrementBC, // 0x03
     OP_IncrementB, // 0x04
     OP_DecrementB, // 0x05
@@ -15,7 +15,7 @@ enum opcodes {
     OP_Unnamed07, // 0x07
     OP_Pad1, // 0x08
     OP_AddBCToHL, // 0x09
-    OP_Unnamed0A, // 0x0A
+    OP_LoadMemoryLocationBCIntoA, // 0x0A
     OP_DecrementBC, // 0x0B
     OP_IncrementC, // 0x0C
     OP_DecrementC, // 0x0D
@@ -23,7 +23,7 @@ enum opcodes {
     OP_Unnamed0F, // 0x0F
     OP_Pad2, // 0x10
     OP_Unnamed11, // 0x11
-    OP_Unnamed12, // 0x12
+    OP_StoreAInMemoryLocationDE, // 0x12
     OP_IncrementDE, // 0x13
     OP_IncrementD, // 0x14
     OP_DecrementD, // 0x15
@@ -31,7 +31,7 @@ enum opcodes {
     OP_Unnamed17, // 0x17
     OP_Pad3, // 0x18
     OP_AddDEToHL, // 0x19
-    OP_Unnamed1A, // 0x1A
+    OP_LoadMemoryLocationDEIntoA, // 0x1A
     OP_DecrementDE, // 0x1B
     OP_IncrementE, // 0x1C
     OP_DecrementE, // 0x1D

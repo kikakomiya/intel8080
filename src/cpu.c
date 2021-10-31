@@ -709,6 +709,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
     switch (insn.opcode) {
         case OP_NOP: // 0x00
             break;
+        case OP_StoreAInMemoryLocationBC: // 0x02
+            cpu->ram[cpu->BC] = cpu->A;
+            break;
         case OP_IncrementBC: // 0x03
             cpu->BC += 1;
             break;
@@ -723,6 +726,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_AddBCToHL: // 0x09
             cpu->HL += cpu->BC;
             break;
+        case OP_LoadMemoryLocationBCIntoA: // 0x0A
+            cpu->A = cpu->ram[cpu->BC];
+            break;
         case OP_DecrementBC: // 0x0B
             cpu->BC -= 1;
             break;
@@ -733,6 +739,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             cpu->C -= 1;
             break;
         case OP_Pad2: // 0x10
+            break;
+        case OP_StoreAInMemoryLocationDE: // 0x12
+            cpu->ram[cpu->DE] = cpu->A;
             break;
         case OP_IncrementDE: // 0x13
             cpu->DE += 1;
@@ -747,6 +756,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_AddDEToHL: // 0x19
             cpu->HL += cpu->DE;
+            break;
+        case OP_LoadMemoryLocationDEIntoA: // 0x1A
+            cpu->A = cpu->ram[cpu->DE];
             break;
         case OP_DecrementDE: // 0x1B
             cpu->DE -= 1;
