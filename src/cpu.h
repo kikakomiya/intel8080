@@ -13,7 +13,7 @@ enum opcodes {
     OP_DecrementB, // 0x05
     OP_Unnamed06, // 0x06
     OP_Unnamed07, // 0x07
-    OP_Pad1, // 0z08
+    OP_Pad1, // 0x08
     OP_AddBCToHL, // 0x09
     OP_Unnamed0A, // 0x0A
     OP_DecrementBC, // 0x0B
@@ -305,8 +305,6 @@ struct cpu {
 
 struct instruction {
     uint16_t opcode;
-    uint8_t arg1;
-    uint8_t arg2;
 };
 
 void initialiseCPU(struct cpu* cpu);
