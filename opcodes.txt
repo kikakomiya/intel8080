@@ -60,7 +60,7 @@ Opcode      Instruction     Size    Flags               Function
 0x3a        LDA adr         3                           A <- (adr)
 0x3b        DCX SP          1                           SP = SP-1
 0x3c        INR A           1       Z, S, P, AC         A <- A+1
-0x3d        DCR AC          1       Z, S, P, AC         A <- A-1
+0x3d        DCR A           1       Z, S, P, AC         A <- A-1
 0x3e        MVI A, D8       2                           A <- byte 2
 0x3f        CMC             1       CY                  CY = !CY
 0x40        MOV B, B        1                           B <- B
