@@ -709,6 +709,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
     switch (insn.opcode) {
         case OP_NOP: // 0x00
             break;
+        case OP_StoreAInMemoryLocationBC: // 0x02
+            cpu->ram[cpu->BC] = cpu->A;
+            break;
         case OP_IncrementBC: // 0x03
             cpu->BC += 1;
             break;
@@ -723,6 +726,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_AddBCToHL: // 0x09
             cpu->HL += cpu->BC;
             break;
+        case OP_LoadMemoryLocationBCInA: // 0x0A
+            cpu->A = cpu->ram[cpu->BC];
+            break;
         case OP_DecrementBC: // 0x0B
             cpu->BC -= 1;
             break;
@@ -733,6 +739,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             cpu->C -= 1;
             break;
         case OP_Pad2: // 0x10
+            break;
+        case OP_StoreAInMemoryLocationDE: // 0x12
+            cpu->ram[cpu->DE] = cpu->A;
             break;
         case OP_IncrementDE: // 0x13
             cpu->DE += 1;
@@ -747,6 +756,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_AddDEToHL: // 0x19
             cpu->HL += cpu->DE;
+            break;
+        case OP_LoadMemoryLocationDEInA: // 0x1A
+            cpu->A = cpu->ram[cpu->DE];
             break;
         case OP_DecrementDE: // 0x1B
             cpu->DE -= 1;
@@ -784,6 +796,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_IncrementSP: // 0x33
             cpu->sp += 1;
             break;
+        case OP_SetCarry: // 0x37
+            cpu->flags.C = 1;
+            break;
         case OP_Pad7: // 0x38
             break;
         case OP_AddSPToHL: // 0x39
@@ -816,6 +831,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_CopyLToB: // 0x45
             cpu->B = cpu->L;
             break;
+        case OP_CopyMToB: // 0x46
+            cpu->B = cpu->ram[cpu->M];
+            break;
         case OP_CopyAToB: // 0x47
             cpu->B = cpu->A;
             break;
@@ -836,6 +854,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_CopyLToC: // 0x4D
             cpu->C = cpu->L;
+            break;
+        case OP_CopyMToC: // 0x4E
+            cpu->C = cpu->ram[cpu->M];
             break;
         case OP_CopyAToC: // 0x4F
             cpu->C = cpu->A;
@@ -858,6 +879,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_CopyLToD: // 0x55
             cpu->D = cpu->L;
             break;
+        case OP_CopyMToD: // 0x56
+            cpu->D = cpu->ram[cpu->M];
+            break;
         case OP_CopyAToD: // 0x57
             cpu->D = cpu->A;
             break;
@@ -878,6 +902,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_CopyLToE: // 0x5D
             cpu->E = cpu->L;
+            break;
+        case OP_CopyMToE: // 0x5E
+            cpu->E = cpu->ram[cpu->M];
             break;
         case OP_CopyAToE: // 0x5F
             cpu->E = cpu->A;
@@ -900,6 +927,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_CopyLToH: // 0x65
             cpu->H = cpu->L;
             break;
+        case OP_CopyMToH: // 0x66
+            cpu->H = cpu->ram[cpu->M];
+            break;
         case OP_CopyAToH: // 0x67
             cpu->H = cpu->A;
             break;
@@ -921,8 +951,32 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_CopyLToL: // 0x6D
             cpu->L = cpu->L;
             break;
+        case OP_CopyMToL: // 0x6E
+            cpu->L = cpu->ram[cpu->M];
+            break;
         case OP_CopyAToL: // 0x6F
             cpu->L = cpu->A;
+            break;
+        case OP_CopyBToM: // 0x70
+            cpu->ram[cpu->M] = cpu->B;
+            break;
+        case OP_CopyCToM: // 0x71
+            cpu->ram[cpu->M] = cpu->C;
+            break;
+        case OP_CopyDToM: // 0x72
+            cpu->ram[cpu->M] = cpu->D;
+            break;
+        case OP_CopyEToM: // 0x73
+            cpu->ram[cpu->M] = cpu->E;
+            break;
+        case OP_CopyHToM: // 0x74
+            cpu->ram[cpu->M] = cpu->H;
+            break;
+        case OP_CopyLToM: // 0x75
+            cpu->ram[cpu->M] = cpu->L;
+            break;
+        case OP_CopyAToM: // 0x77
+            cpu->ram[cpu->M] = cpu->A;
             break;
         case OP_CopyBToA: // 0x78
             cpu->A = cpu->B;
@@ -941,6 +995,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_CopyLToA: // 0x7D
             cpu->A = cpu->L;
+            break;
+        case OP_CopyMToA: // 0x7E
+            cpu->A = cpu->ram[cpu->M];
             break;
         case OP_CopyAToA: // 0x7F
             cpu->A = cpu->A;
@@ -963,6 +1020,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_AddL: // 0x85
             cpu->A += cpu->L;
             break;
+        case OP_AddM: // 0x86
+            cpu->A += cpu->ram[cpu->M];
+            break;
         case OP_AddA: // 0x87
             cpu->A += cpu->A;
             break;
@@ -983,6 +1043,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_SubL: // 0x95
             cpu->A -= cpu->L;
+            break;
+        case OP_SubM: // 0x96
+            cpu->A -= cpu->ram[cpu->M];
             break;
         case OP_SubA: // 0x97
             cpu->A -= cpu->A;
@@ -1005,6 +1068,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_AAndL: // 0xA5
             cpu->A &= cpu->L;
             break;
+        case OP_AAndM: // 0xA6
+            cpu->A &= cpu->ram[cpu->M];
+            break;
         case OP_AAndA: // 0xA7
             cpu->A &= cpu->A;
             break;
@@ -1025,6 +1091,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_AXorL: // 0xAD
             cpu->A ^= cpu->L;
+            break;
+        case OP_AXorM: // 0xAE
+            cpu->A ^= cpu->ram[cpu->M];
             break;
         case OP_AXorA: // 0xAF
             cpu->A ^= cpu->A;
@@ -1047,6 +1116,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_AOrL: // 0xB5
             cpu->A |= cpu->L;
             break;
+        case OP_AOrM: // 0xB6
+            cpu->A |= cpu->ram[cpu->M];
+            break;
         case OP_AOrA: // 0xB7
             cpu->A |= cpu->A;
             break;
@@ -1055,6 +1127,32 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_Pad9: // 0xD9
             break;
         case OP_Pad10: // 0xDD
+            break;
+        case OP_PopHL: // 0xE1
+            cpu->H = cpu->ram[cpu->sp+1];
+            cpu->L = cpu->ram[cpu->sp];
+            cpu->sp += 2;
+            break;
+        case OP_ExchangeHAndLWithSPAndSPPlusOne: // 0xE3
+            uint8_t e3temp1 = cpu->H;
+            uint8_t e3temp2 = cpu->L;
+            cpu->H = cpu->sp+1;
+            cpu->L = cpu->sp;
+            cpu->ram[cpu->sp] = e3temp2;
+            cpu->ram[cpu->sp+1] = e3temp1;
+            break;
+        case OP_PushHL: // 0xE5
+            cpu->ram[cpu->sp-2] = cpu->L;
+            cpu->ram[cpu->sp-1] = cpu->H;
+            cpu->sp -= 2;
+            break;
+        case OP_ExchangeHAndLWithDAndE: // 0xEB
+            uint8_t ebtemp1 = cpu->H;
+            uint8_t ebtemp2 = cpu->L;
+            cpu->H = cpu->D;
+            cpu->L = cpu->E;
+            cpu->D = ebtemp1;
+            cpu->E = ebtemp2;
             break;
         case OP_Pad11: // 0xED
             break;

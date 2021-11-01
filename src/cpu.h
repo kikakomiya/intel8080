@@ -7,7 +7,7 @@
 enum opcodes {
     OP_NOP, // 0x00
     OP_Unnamed01, // 0x01
-    OP_Unnamed02, // 0x02
+    OP_StoreAInMemoryLocationBC, // 0x02
     OP_IncrementBC, // 0x03
     OP_IncrementB, // 0x04
     OP_DecrementB, // 0x05
@@ -15,7 +15,7 @@ enum opcodes {
     OP_Unnamed07, // 0x07
     OP_Pad1, // 0x08
     OP_AddBCToHL, // 0x09
-    OP_Unnamed0A, // 0x0A
+    OP_LoadMemoryLocationBCInA, // 0x0A
     OP_DecrementBC, // 0x0B
     OP_IncrementC, // 0x0C
     OP_DecrementC, // 0x0D
@@ -23,7 +23,7 @@ enum opcodes {
     OP_Unnamed0F, // 0x0F
     OP_Pad2, // 0x10
     OP_Unnamed11, // 0x11
-    OP_Unnamed12, // 0x12
+    OP_StoreAInMemoryLocationDE, // 0x12
     OP_IncrementDE, // 0x13
     OP_IncrementD, // 0x14
     OP_DecrementD, // 0x15
@@ -31,7 +31,7 @@ enum opcodes {
     OP_Unnamed17, // 0x17
     OP_Pad3, // 0x18
     OP_AddDEToHL, // 0x19
-    OP_Unnamed1A, // 0x1A
+    OP_LoadMemoryLocationDEInA, // 0x1A
     OP_DecrementDE, // 0x1B
     OP_IncrementE, // 0x1C
     OP_DecrementE, // 0x1D
@@ -60,7 +60,7 @@ enum opcodes {
     OP_IncrementM, // 0x34
     OP_DecrementM, // 0x35
     OP_Unnamed36, // 0x36
-    OP_Unnamed37, // 0x37
+    OP_SetCarry, // 0x37
     OP_Pad7, // 0x38
     OP_AddSPToHL, // 0x39
     OP_Unnamed3A, // 0x3A
@@ -230,27 +230,27 @@ enum opcodes {
     OP_UnnamedDE, // 0xDE
     OP_UnnamedDF, // 0xDF
     OP_UnnamedE0, // 0xE0
-    OP_UnnamedE1, // 0xE1
+    OP_PopHL, // 0xE1
     OP_UnnamedE2, // 0xE2
-    OP_UnnamedE3, // 0xE3
+    OP_ExchangeHAndLWithSPAndSPPlusOne, // 0xE3
     OP_UnnamedE4, // 0xE4
-    OP_UnnamedE5, // 0xE5
+    OP_PushHL, // 0xE5
     OP_UnnamedE6, // 0xE6
     OP_UnnamedE7, // 0xE7
     OP_UnnamedE8, // 0xE8
     OP_UnnamedE9, // 0xE9
     OP_UnnamedEA, // 0xEA
-    OP_UnnamedEB, // 0xEB
+    OP_ExchangeHAndLWithDAndE, // 0xEB
     OP_UnnamedEC, // 0xEC
     OP_Pad11, // 0xED
     OP_UnnamedEE, // 0xEE
     OP_UnnamedEF, // 0xEF
     OP_UnnamedF0, // 0xF0
-    OP_UnnamedF1, // 0xF1
+    OP_PopPSW, // 0xF1
     OP_UnnamedF2, // 0xF2
     OP_UnnamedF3, // 0xF3
     OP_UnnamedF4, // 0xF4
-    OP_UnnamedF5, // 0xF5
+    OP_PushPSW, // 0xF5
     OP_UnnamedF6, // 0xF6
     OP_UnnamedF7, // 0xF7
     OP_UnnamedF8, // 0xF8
