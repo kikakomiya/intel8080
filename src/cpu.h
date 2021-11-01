@@ -15,7 +15,7 @@ enum opcodes {
     OP_Unnamed07, // 0x07
     OP_Pad1, // 0x08
     OP_AddBCToHL, // 0x09
-    OP_LoadMemoryLocationBCInA, // 0x0A
+    OP_LoadMemoryLocationBCIntoA, // 0x0A
     OP_DecrementBC, // 0x0B
     OP_IncrementC, // 0x0C
     OP_DecrementC, // 0x0D
@@ -31,7 +31,7 @@ enum opcodes {
     OP_Unnamed17, // 0x17
     OP_Pad3, // 0x18
     OP_AddDEToHL, // 0x19
-    OP_LoadMemoryLocationDEInA, // 0x1A
+    OP_LoadMemoryLocationDEIntoA, // 0x1A
     OP_DecrementDE, // 0x1B
     OP_IncrementE, // 0x1C
     OP_DecrementE, // 0x1D

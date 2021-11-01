@@ -726,7 +726,7 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_AddBCToHL: // 0x09
             cpu->HL += cpu->BC;
             break;
-        case OP_LoadMemoryLocationBCInA: // 0x0A
+        case OP_LoadMemoryLocationBCIntoA: // 0x0A
             cpu->A = cpu->ram[cpu->BC];
             break;
         case OP_DecrementBC: // 0x0B
@@ -757,7 +757,7 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_AddDEToHL: // 0x19
             cpu->HL += cpu->DE;
             break;
-        case OP_LoadMemoryLocationDEInA: // 0x1A
+        case OP_LoadMemoryLocationDEIntoA: // 0x1A
             cpu->A = cpu->ram[cpu->DE];
             break;
         case OP_DecrementDE: // 0x1B
