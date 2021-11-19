@@ -6,12 +6,12 @@
 // This is until I understand their function and can name it appropriately.
 enum opcodes {
     OP_NOP, // 0x00
-    OP_Unnamed01, // 0x01
+    OP_StoreNextTwoBytesInBC, // 0x01
     OP_StoreAInMemoryLocationBC, // 0x02
     OP_IncrementBC, // 0x03
     OP_IncrementB, // 0x04
     OP_DecrementB, // 0x05
-    OP_Unnamed06, // 0x06
+    OP_StoreNextByteInB, // 0x06
     OP_Unnamed07, // 0x07
     OP_Pad1, // 0x08
     OP_AddBCToHL, // 0x09
@@ -19,15 +19,15 @@ enum opcodes {
     OP_DecrementBC, // 0x0B
     OP_IncrementC, // 0x0C
     OP_DecrementC, // 0x0D
-    OP_Unnamed0E, // 0x0E
+    OP_StoreNextByteInC, // 0x0E
     OP_Unnamed0F, // 0x0F
     OP_Pad2, // 0x10
-    OP_Unnamed11, // 0x11
+    OP_StoreNextTwoBytesInDE, // 0x11
     OP_StoreAInMemoryLocationDE, // 0x12
     OP_IncrementDE, // 0x13
     OP_IncrementD, // 0x14
     OP_DecrementD, // 0x15
-    OP_Unnamed16, // 0x16
+    OP_StoreNextByteInD, // 0x16
     OP_Unnamed17, // 0x17
     OP_Pad3, // 0x18
     OP_AddDEToHL, // 0x19
@@ -35,15 +35,15 @@ enum opcodes {
     OP_DecrementDE, // 0x1B
     OP_IncrementE, // 0x1C
     OP_DecrementE, // 0x1D
-    OP_Unnamed1E, // 0x1E
+    OP_StoreNextByteInE, // 0x1E
     OP_Unnamed1F, // 0x1F
     OP_Pad4, // 0x20
-    OP_Unnamed21, // 0x21
+    OP_StoreNextTwoBytesInHL, // 0x21
     OP_Unnamed22, // 0x22
     OP_IncrementHL, // 0x23
     OP_IncrementH, // 0x24
     OP_DecrementH, // 0x25
-    OP_Unnamed26, // 0x26
+    OP_StoreNextByteInH, // 0x26
     OP_Unnamed27, // 0x27
     OP_Pad5, // 0x28
     OP_AddHIToHL, // 0x29
@@ -51,7 +51,7 @@ enum opcodes {
     OP_DecrementHL, // 0x2B
     OP_IncrementL, // 0x2C
     OP_DecrementL, // 0x2D
-    OP_Unnamed2E, // 0x2E
+    OP_StoreNextByteInL, // 0x2E
     OP_Unnamed2F, // 0x2F
     OP_Pad6, // 0x30
     OP_Unnamed31, // 0x31
@@ -59,7 +59,7 @@ enum opcodes {
     OP_IncrementSP, // 0x33
     OP_IncrementM, // 0x34
     OP_DecrementM, // 0x35
-    OP_Unnamed36, // 0x36
+    OP_StoreNextByteInM, // 0x36
     OP_SetCarry, // 0x37
     OP_Pad7, // 0x38
     OP_AddSPToHL, // 0x39
@@ -67,7 +67,7 @@ enum opcodes {
     OP_DecrementSP, // 0x3B
     OP_IncrementA, // 0x3C
     OP_DecrementA, // 0x3D
-    OP_Unnamed3E, // 0x3E
+    OP_StoreNextByteInA, // 0x3E
     OP_Unnamed3F, // 0x3F
     OP_CopyBToB, // 0x40
     OP_CopyCToB, // 0x41

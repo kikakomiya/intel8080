@@ -709,6 +709,10 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
     switch (insn.opcode) {
         case OP_NOP: // 0x00
             break;
+        case OP_StoreNextTwoBytesInBC: // 0x01
+            cpu->B = cpu->ram[cpu->pc+2];
+            cpu->C = cpu->ram[cpu->pc+1];
+            break;
         case OP_StoreAInMemoryLocationBC: // 0x02
             cpu->ram[cpu->BC] = cpu->A;
             break;
@@ -720,6 +724,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_DecrementB: // 0x05
             cpu->B -= 1;
+            break;
+        case OP_StoreNextByteInB: // 0x06
+            cpu->B = cpu->ram[cpu->pc+1];
             break;
         case OP_Pad1: // 0x08
             break;
@@ -738,7 +745,14 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_DecrementC: // 0x0D
             cpu->C -= 1;
             break;
+        case OP_StoreNextByteInC: // 0x0E
+            cpu->C = cpu->ram[cpu->pc+1];
+            break;
         case OP_Pad2: // 0x10
+            break;
+        case OP_StoreNextTwoBytesInDE: // 0x11
+            cpu->D = cpu->ram[cpu->pc+2];
+            cpu->E = cpu->ram[cpu->pc+1];
             break;
         case OP_StoreAInMemoryLocationDE: // 0x12
             cpu->ram[cpu->DE] = cpu->A;
@@ -751,6 +765,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_DecrementD: // 0x15
             cpu->D -= 1;
+            break;
+        case OP_StoreNextByteInD: // 0x16
+            cpu->D = cpu->ram[cpu->pc+1];
             break;
         case OP_Pad3: // 0x18
             break;
@@ -769,7 +786,14 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_DecrementE: // 0x1D
             cpu->E -= 1;
             break;
+        case OP_StoreNextByteInE: // 0x1E
+            cpu->E = cpu->ram[cpu->pc+1];
+            break;
         case OP_Pad4: // 0x20
+            break;
+        case OP_StoreNextTwoBytesInHL: // 0x21
+            cpu->H = cpu->ram[cpu->pc+2];
+            cpu->L = cpu->ram[cpu->pc+1];
             break;
         case OP_IncrementHL: // 0x23
             cpu->HL += 1;
@@ -779,6 +803,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_DecrementH: // 0x25
             cpu->H -= 1;
+            break;
+        case OP_StoreNextByteInH: // 0x26
+            cpu->H = cpu->ram[cpu->pc+1];
             break;
         case OP_Pad5: // 0x28
             break;
@@ -791,10 +818,16 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_DecrementL: // 0x2D
             cpu->L -= 1;
             break;
+        case OP_StoreNextByteInL: // 0x2E
+            cpu->L = cpu->ram[cpu->pc+1];
+            break;
         case OP_Pad6: // 0x30
             break;
         case OP_IncrementSP: // 0x33
             cpu->sp += 1;
+            break;
+        case OP_StoreNextByteInM: // 0x36
+            cpu->ram[cpu->M] = cpu->ram[cpu->pc+1];
             break;
         case OP_SetCarry: // 0x37
             cpu->flags.C = 1;
@@ -812,6 +845,9 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_DecrementA: // 0x3D
             cpu->A -= 1;
+            break;
+        case OP_StoreNextByteInA: // 0x3E
+            cpu->A = cpu->ram[cpu->pc+1];
             break;
         case OP_CopyBToB: // 0x40
             cpu->B = cpu->B;
