@@ -46,7 +46,7 @@ enum opcodes {
     OP_StoreNextByteInH, // 0x26
     OP_Unnamed27, // 0x27
     OP_Pad5, // 0x28
-    OP_AddHIToHL, // 0x29
+    OP_AddHLToHL, // 0x29
     OP_Unnamed2A, // 0x2A
     OP_DecrementHL, // 0x2B
     OP_IncrementL, // 0x2C

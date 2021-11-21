@@ -30,7 +30,7 @@ Opcode      Instruction     Size    Flags               Function
 0x1c        INR E           1       Z, S, P, AC         E <- E+1
 0x1d        DCR E           1       Z, S, P, AC         E <- E-1
 0x1e        MVI E, D8       2                           E <- byte 2
-0x1f        RAR             1       CY                  A = A >> 1; bit 7 = prev bit 7; CY = prev bit 0
+0x1f        RAR             1       CY                  A = A >> 1; bit 7 = prev bit CY; CY = prev bit 0
 0x20        -
 0x21        LXI H, D16      3                           H <- byte 3, L <- byte 2
 0x22        SHLD adr        3                           (adr) <- L; (adr+1) <- H
@@ -40,7 +40,7 @@ Opcode      Instruction     Size    Flags               Function
 0x26        MVI H, D8       2                           H <- byte 2
 0x27        DAA             1                           special
 0x28        -
-0x29        DAD H           1       CY                  HL = HL+HI
+0x29        DAD H           1       CY                  HL = HL+HL
 0x2a        LHLD adr        3                           L <- (adr); H <- (adr+1)
 0x2b        DCX H           1                           HL = HL-1
 0x2c        INR L           1       Z, S, P, AC         L <- L+1

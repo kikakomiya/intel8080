@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -117,7 +118,7 @@ struct instruction decodeInstruction(uint16_t opcode) {
             insn.opcode = OP_Pad5;
             break;
         case 0x29:
-            insn.opcode = OP_AddHIToHL;
+            insn.opcode = OP_AddHLToHL;
             break;
         case 0x2A:
             break;
@@ -731,7 +732,14 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_Pad1: // 0x08
             break;
         case OP_AddBCToHL: // 0x09
-            cpu->HL += cpu->BC;
+            uint32_t temp09 = (uint32_t)cpu->BC + (uint32_t)cpu->HL;
+            cpu->HL = temp09 & 0xFFFF;
+            if (temp09 > 0xFFFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_LoadMemoryLocationBCIntoA: // 0x0A
             cpu->A = cpu->ram[cpu->BC];
@@ -772,7 +780,14 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_Pad3: // 0x18
             break;
         case OP_AddDEToHL: // 0x19
-            cpu->HL += cpu->DE;
+            uint32_t temp19 = (uint32_t)cpu->DE + (uint32_t)cpu->HL;
+            cpu->HL = temp19 & 0xFFFF;
+            if (temp19 > 0xFFFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_LoadMemoryLocationDEIntoA: // 0x1A
             cpu->A = cpu->ram[cpu->DE];
@@ -809,6 +824,16 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             break;
         case OP_Pad5: // 0x28
             break;
+        case OP_AddHLToHL: // 0x29
+            uint32_t temp29 = (uint32_t)cpu->HL + (uint32_t)cpu->HL;
+            cpu->HL = temp29 & 0xFFFF;
+            if (temp29 > 0xFFFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
+            break;
         case OP_DecrementHL: // 0x2B
             cpu->HL -= 1;
             break;
@@ -835,7 +860,14 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_Pad7: // 0x38
             break;
         case OP_AddSPToHL: // 0x39
-            cpu->HL += cpu->sp;
+            uint32_t temp39 = (uint32_t)cpu->sp + (uint32_t)cpu->HL;
+            cpu->HL = temp39 & 0xFFFF;
+            if (temp39 > 0xFFFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_DecrementSP: // 0x3B
             cpu->sp -= 1;
@@ -1039,28 +1071,84 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             cpu->A = cpu->A;
             break;
         case OP_AddB: // 0x80
-            cpu->A += cpu->B;
+            uint16_t temp80 = (uint16_t)cpu->A + (uint16_t)cpu->B;
+            cpu->A = temp80 & 0xFF;
+            if (temp80 > 0xFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_AddC: // 0x81
-            cpu->A += cpu->C;
+            uint16_t temp81 = (uint16_t)cpu->A + (uint16_t)cpu->C;
+            cpu->A = temp81 & 0xFF;
+            if (temp81 > 0xFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_AddD: // 0x82
-            cpu->A += cpu->D;
+            uint16_t temp82 = (uint16_t)cpu->A + (uint16_t)cpu->D;
+            cpu->A = temp82 & 0xFF;
+            if (temp82 > 0xFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_AddE: // 0x83
-            cpu->A += cpu->E;
+            uint16_t temp83 = (uint16_t)cpu->A + (uint16_t)cpu->E;
+            cpu->A = temp83 & 0xFF;
+            if (temp83 > 0xFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_AddH: // 0x84
-            cpu->A += cpu->H;
+            uint16_t temp84 = (uint16_t)cpu->A + (uint16_t)cpu->H;
+            cpu->A = temp84 & 0xFF;
+            if (temp84 > 0xFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_AddL: // 0x85
-            cpu->A += cpu->L;
+            uint16_t temp85 = (uint16_t)cpu->A + (uint16_t)cpu->L;
+            cpu->A = temp85 & 0xFF;
+            if (temp85 > 0xFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_AddM: // 0x86
-            cpu->A += cpu->ram[cpu->M];
+            uint16_t temp86 = (uint16_t)cpu->A + (uint16_t)cpu->ram[cpu->M];
+            cpu->A = temp86 & 0xFF;
+            if (temp86 > 0xFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_AddA: // 0x87
-            cpu->A += cpu->A;
+            uint16_t temp87 = (uint16_t)cpu->A + (uint16_t)cpu->A;
+            cpu->A = temp87 & 0xFF;
+            if (temp87 > 0xFF) {
+                cpu->flags.C = 1;
+            }
+            else {
+                cpu->flags.C = 0;
+            }
             break;
         case OP_SubB: // 0x90
             cpu->A -= cpu->B;
