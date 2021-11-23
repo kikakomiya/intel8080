@@ -198,11 +198,11 @@ enum opcodes {
     OP_ACompareM, // 0xBE
     OP_ACompareA, // 0xBF
     OP_UnnamedC0, // 0xC0
-    OP_UnnamedC1, // 0xC1
+    OP_PopBC, // 0xC1
     OP_JumpIfNotZero, // 0xC2
     OP_Jump, // 0xC3
     OP_CallIfNotZero, // 0xC4
-    OP_UnnamedC5, // 0xC5
+    OP_PushBC, // 0xC5
     OP_UnnamedC6, // 0xC6
     OP_UnnamedC7, // 0xC7
     OP_ReturnIfZero, // 0xC8
@@ -214,11 +214,11 @@ enum opcodes {
     OP_UnnamedCE, // 0xCE
     OP_UnnamedCF, // 0xCF
     OP_UnnamedD0, // 0xD0
-    OP_UnnamedD1, // 0xD1
+    OP_PopDE, // 0xD1
     OP_UnnamedD2, // 0xD2
     OP_UnnamedD3, // 0xD3
     OP_UnnamedD4, // 0xD4
-    OP_UnnamedD5, // 0xD5
+    OP_PushDE, // 0xD5
     OP_UnnamedD6, // 0xD6
     OP_UnnamedD7, // 0xD7
     OP_UnnamedD8, // 0xD8
@@ -235,7 +235,7 @@ enum opcodes {
     OP_ExchangeHAndLWithSPAndSPPlusOne, // 0xE3
     OP_UnnamedE4, // 0xE4
     OP_PushHL, // 0xE5
-    OP_UnnamedE6, // 0xE6
+    OP_ANDImmediate, // 0xE6
     OP_UnnamedE7, // 0xE7
     OP_UnnamedE8, // 0xE8
     OP_UnnamedE9, // 0xE9
@@ -243,7 +243,7 @@ enum opcodes {
     OP_ExchangeHAndLWithDAndE, // 0xEB
     OP_UnnamedEC, // 0xEC
     OP_Pad11, // 0xED
-    OP_UnnamedEE, // 0xEE
+    OP_XORImmediate, // 0xEE
     OP_UnnamedEF, // 0xEF
     OP_UnnamedF0, // 0xF0
     OP_PopPSW, // 0xF1
@@ -251,7 +251,7 @@ enum opcodes {
     OP_UnnamedF3, // 0xF3
     OP_UnnamedF4, // 0xF4
     OP_PushPSW, // 0xF5
-    OP_UnnamedF6, // 0xF6
+    OP_ORImmediate, // 0xF6
     OP_UnnamedF7, // 0xF7
     OP_UnnamedF8, // 0xF8
     OP_SetSPToHL, // 0xF9

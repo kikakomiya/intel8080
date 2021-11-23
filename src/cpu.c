@@ -1246,7 +1246,32 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
         case OP_AOrA: // 0xB7
             cpu->A |= cpu->A;
             break;
+        case OP_PopBC: // 0xC1
+            cpu->B = cpu->ram[cpu->sp+1];
+            cpu->C = cpu->ram[cpu->sp];
+            cpu->sp += 2;
+            break;
+        case OP_JumpIfNotZero: // 0xC2
+            if (cpu->flags.C == 0) {
+                // read next two bytes and set into PC
+            }
+            break;
+        case OP_PushBC: // 0xC5
+            cpu->ram[cpu->sp-2] = cpu->C;
+            cpu->ram[cpu->sp-1] = cpu->B;
+            cpu->sp -= 2;
+            break;
         case OP_Pad8: // 0xCB
+            break;
+        case OP_PopDE: // 0xD1
+            cpu->D = cpu->ram[cpu->sp+1];
+            cpu->E = cpu->ram[cpu->sp];
+            cpu->sp += 2;
+            break;
+        case OP_PushDE: // 0xD5
+            cpu->ram[cpu->sp-2] = cpu->E;
+            cpu->ram[cpu->sp-1] = cpu->D;
+            cpu->sp -= 2;
             break;
         case OP_Pad9: // 0xD9
             break;
@@ -1270,6 +1295,11 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             cpu->ram[cpu->sp-1] = cpu->H;
             cpu->sp -= 2;
             break;
+        case OP_ANDImmediate: // 0xE6
+            cpu->A &= cpu->ram[cpu->pc+1];
+            cpu->flags.C = 0;
+            cpu->flags.AC = 0;
+            break;
         case OP_ExchangeHAndLWithDAndE: // 0xEB
             uint8_t ebtemp1 = cpu->H;
             uint8_t ebtemp2 = cpu->L;
@@ -1279,6 +1309,26 @@ void executeInstruction(struct instruction insn, struct cpu* cpu) {
             cpu->E = ebtemp2;
             break;
         case OP_Pad11: // 0xED
+            break;
+        case OP_XORImmediate: // 0xEE
+            cpu->A ^= cpu->ram[cpu->pc+1];
+            cpu->flags.C = 0;
+            cpu->flags.AC = 0;
+            break;
+        case OP_PopPSW: // 0xF1
+            cpu->PSW = cpu->ram[cpu->sp];
+            cpu->A = cpu->ram[cpu->sp+1];
+            cpu->sp += 2;
+            break;
+        case OP_PushPSW: // 0xF5
+            cpu->ram[cpu->sp-2] = cpu->PSW;
+            cpu->ram[cpu->sp-1] = cpu->A;
+            cpu->sp -= 2;
+            break;
+        case OP_ORImmediate: // 0xF6
+            cpu->A |= cpu->ram[cpu->pc+1];
+            cpu->flags.C = 0;
+            cpu->flags.AC = 0;
             break;
         case OP_SetSPToHL: // 0xF9
             cpu->sp = cpu->HL;
