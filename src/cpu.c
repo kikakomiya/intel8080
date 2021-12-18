@@ -905,29 +905,117 @@ void executeInstruction(uint8_t opcode, struct cpu* cpu) {
             }
             break;
         }
-        case OP_SubB: // 0x90
-            cpu->A -= cpu->B;
+        // SUB B
+        // Subtract value of register B from accumulator to accumulator.
+        // Page 3-63
+        case 0x90:
+            cpu->flags.C = cpu->B > cpu->A;
+            cpu->A += ~cpu->B + 1;
             break;
-        case OP_SubC: // 0x91
-            cpu->A -= cpu->C;
+        // SUB C
+        // Subtract value of register C from accumulator to accumulator.
+        // Page 3-63
+        case 0x91:
+            cpu->flags.C = cpu->C > cpu->A;
+            cpu->A += ~cpu->C + 1;
             break;
-        case OP_SubD: // 0x92
-            cpu->A -= cpu->D;
+        // SUB D
+        // Subtract value of register D from accumulator to accumulator.
+        // Page 3-63
+        case 0x92:
+            cpu->flags.C = cpu->D > cpu->A;
+            cpu->A += ~cpu->D + 1;
             break;
-        case OP_SubE: // 0x93
-            cpu->A -= cpu->E;
+        // SUB E
+        // Subtract value of register E from accumulator to accumulator.
+        // Page 3-63
+        case 0x93:
+            cpu->flags.C = cpu->E > cpu->A;
+            cpu->A += ~cpu->E + 1;
             break;
-        case OP_SubH: // 0x94
-            cpu->A -= cpu->H;
+        // SUB H
+        // Subtract value of register H from accumulator to accumulator.
+        // Page 3-63
+        case 0x94:
+            cpu->flags.C = cpu->H > cpu->A;
+            cpu->A += ~cpu->H + 1;
             break;
-        case OP_SubL: // 0x95
-            cpu->A -= cpu->L;
+        // SUB L
+        // Subtract value of register L from accumulator to accumulator.
+        // Page 3-63
+        case 0x95:
+            cpu->flags.C = cpu->L > cpu->A;
+            cpu->A += ~cpu->L + 1;
             break;
-        case OP_SubM: // 0x96
-            cpu->A -= cpu->ram[cpu->M];
+        // SUB M
+        // Subtract value in RAM denoted by value of register pair M from accumulator to accumulator.
+        // Page 3-63
+        case 0x96:
+            cpu->flags.C = cpu->ram[cpu->M] > cpu->A;
+            cpu->A += ~cpu->ram[cpu->M] + 1;
             break;
-        case OP_SubA: // 0x97
-            cpu->A -= cpu->A;
+        // SUB A
+        // Subtract value of accumulator from accumulator to accumulator.
+        // Page 3-63
+        case 0x97:
+            cpu->flags.C = cpu->A > cpu->A;
+            cpu->A += ~cpu->A + 1;
+            break;
+        // SBB B
+        // Subtract value of register B with carry from accumulator to accumulator.
+        // Page 3-56
+        case 0x98:
+            cpu->flags.C = (cpu->B + cpu->flags.C) > cpu->A;
+            cpu->A += ~(cpu->B + cpu->flags.C) + 1;
+            break;
+        // SBB C
+        // Subtract value of register C with carry from accumulator to accumulator.
+        // Page 3-56
+        case 0x99:
+            cpu->flags.C = (cpu->C + cpu->flags.C) > cpu->A;
+            cpu->A += ~(cpu->C + cpu->flags.C) + 1;
+            break;
+        // SBB D
+        // Subtract value of register D with carry from accumulator to accumulator.
+        // Page 3-56
+        case 0x9A:
+            cpu->flags.C = (cpu->D + cpu->flags.C) > cpu->A;
+            cpu->A += ~(cpu->D + cpu->flags.C) + 1;
+            break;
+        // SBB E
+        // Subtract value of register E with carry from accumulator to accumulator.
+        // Page 3-56
+        case 0x9B:
+            cpu->flags.C = (cpu->E + cpu->flags.C) > cpu->A;
+            cpu->A += ~(cpu->E + cpu->flags.C) + 1;
+            break;
+        // SBB H
+        // Subtract value of register H with carry from accumulator to accumulator.
+        // Page 3-56
+        case 0x9C:
+            cpu->flags.C = (cpu->H + cpu->flags.C) > cpu->A;
+            cpu->A += ~(cpu->H + cpu->flags.C) + 1;
+            break;
+        // SBB L
+        // Subtract value of register L with carry from accumulator to accumulator.
+        // Page 3-56
+        case 0x9D:
+            cpu->flags.C = (cpu->L + cpu->flags.C) > cpu->A;
+            cpu->A += ~(cpu->L + cpu->flags.C) + 1;
+            break;
+        // SBB M
+        // Subtract value in RAM denoted by value of register pair M with carry from accumulator to accumulator.
+        // Page 3-56
+        case 0x9E:
+            cpu->flags.C = (cpu->ram[cpu->M] + cpu->flags.C) > cpu->A;
+            cpu->A += ~(cpu->ram[cpu->M] + cpu->flags.C) + 1;
+            break;
+        // SBB A
+        // Subtract value of accumulator with carry from accumulator to accumulator.
+        // Page 3-56
+        case 0x9F:
+            cpu->flags.C = (cpu->A + cpu->flags.C) > cpu->A;
+            cpu->A += ~(cpu->A + cpu->flags.C) + 1;
             break;
         // ANA B
         // Store result of AND operation between value of accumulator and value of register B in accumulator.
